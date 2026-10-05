@@ -1,0 +1,15 @@
+@use 'sass:map';
+
+// The four breakpoints the original stylesheet used, now named.
+$breakpoints: (
+  lg: 1050px,
+  md: 850px,
+  sm: 720px,
+  xs: 420px,
+);
+
+@mixin below($name) {
+  @media (max-width: map.get($breakpoints, $name)) {
+    @content;
+  }
+}

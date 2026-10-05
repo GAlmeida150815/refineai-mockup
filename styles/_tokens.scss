@@ -1,0 +1,26 @@
+// Design tokens. Kept as CSS custom properties (not Sass variables) so the
+// theme toggle can swap them at runtime via .dark-mode on .app-shell.
+:root {
+    --background: #f7f8fb;
+    --foreground: #20212d;
+    --panel: #fff;
+    --panel-soft: #fafaff;
+    --muted: #777a8d;
+    --border: #e6e7ef;
+    --accent: #8067f3;
+    --accent-soft: #eeeaff;
+    --success: #43c59e;
+    --warning: #f0a35b;
+    --danger: #e5646e;
+}
+
+.dark-mode {
+    --background: #09090b;
+    --foreground: #f1f0f7;
+    --panel: #111114;
+    --panel-soft: #15151a;
+    --muted: #9897a8;
+    --border: #29282f;
+    --accent: #9a84ff;
+    --accent-soft: #211b3b;
+}

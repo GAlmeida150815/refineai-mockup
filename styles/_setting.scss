@@ -1,0 +1,120 @@
+@use '_breakpoints' as *;
+
+.settings-layout {
+  display: grid;
+  grid-template-columns: 190px 1fr;
+  gap: 18px;
+  margin-top: 24px;
+
+  @include below(md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.settings-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  button {
+    text-align: left;
+    padding: 10px 12px;
+    color: var(--muted);
+    border-radius: 8px;
+    font-size: 12px;
+  }
+  button.active,
+  button:hover {
+    background: var(--accent-soft);
+    color: var(--foreground);
+    font-weight: 700;
+  }
+}
+
+.settings-card {
+  max-width: 720px;
+  > p {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: -8px;
+    margin-bottom: 22px;
+  }
+}
+
+.provider-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 0;
+  border-top: 1px solid var(--border);
+  > span:nth-child(2) {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  small { font-size: 11px; color: var(--muted); }
+}
+
+.plan-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px;
+  margin: 18px 0;
+  strong { font-size: 28px; }
+  strong span {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 400;
+  }
+  small { color: var(--muted); }
+}
+
+.toggle-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--border);
+  padding: 15px 0;
+  span {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  small { font-size: 11px; color: var(--muted); }
+  input {
+    accent-color: var(--accent);
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.setting-block {
+  border-top: 1px solid var(--border);
+  margin-top: 14px;
+  padding-top: 20px;
+  label {
+    font-size: 12px;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 9px;
+  }
+  > small {
+    display: block;
+    color: var(--muted);
+    font-size: 11px;
+    margin-top: 8px;
+  }
+}
+
+.markup-control {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 12px;
+  strong { color: var(--success); font-size: 11px; }
+}
