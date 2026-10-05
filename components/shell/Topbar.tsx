@@ -3,7 +3,7 @@
 import { Fragment } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { CircleHelp, Search } from "lucide-react";
+import { CircleHelp, Menu, Search } from "lucide-react";
 import { datasets } from "@/lib/mock-data";
 import { useApp } from "./AppShell";
 
@@ -19,7 +19,7 @@ const sectionLabels: Record<string, string> = {
 
 export function Topbar() {
   const pathname = usePathname();
-  const { team, notify, openModal, runs, prompts } = useApp();
+  const { team, notify, openModal, runs, prompts, setNavOpen } = useApp();
   const [section, id] = pathname.split("/").filter(Boolean);
 
   const crumbs: { label: string; href?: string }[] = [
@@ -47,41 +47,50 @@ export function Topbar() {
 
   return (
     <header className='topbar'>
-      <div className='breadcrumbs'>
-        <span>{team}</span>
-        {crumbs.map((crumb) => (
-          <Fragment key={crumb.label}>
-            <span>/</span>
-            {crumb.href ? (
-              <span>
-                <Link href={crumb.href}>{crumb.label}</Link>
-              </span>
-            ) : (
-              <strong>{crumb.label}</strong>
-            )}
-          </Fragment>
-        ))}
-      </div>
-      <div className='top-actions'>
+      <div className='topbar-left'>
         <button
-          className='icon-button'
-          aria-label='Help'
-          onClick={() => notify("Help center opened")}
+          className='icon-button menu-button'
+          aria-label='Open navigation'
+          onClick={() => setNavOpen(true)}
         >
-          <CircleHelp />
+          <Menu />
         </button>
-        <button
-          className='icon-button'
-          aria-label='Search'
-          onClick={() => notify("Search is ready")}
-        >
-          <Search />
-        </button>
-        <div className='online-dot' />
-        <span className='saved-label'>All changes saved</span>
-        <button className='avatar-stack' onClick={() => openModal("profile")}>
-          JD
-        </button>
+        <div className='breadcrumbs'>
+          <span>{team}</span>
+          {crumbs.map((crumb) => (
+            <Fragment key={crumb.label}>
+              <span>/</span>
+              {crumb.href ? (
+                <span>
+                  <Link href={crumb.href}>{crumb.label}</Link>
+                </span>
+              ) : (
+                <strong>{crumb.label}</strong>
+              )}
+            </Fragment>
+          ))}
+        </div>
+        <div className='top-actions'>
+          <button
+            className='icon-button'
+            aria-label='Help'
+            onClick={() => notify("Help center opened")}
+          >
+            <CircleHelp />
+          </button>
+          <button
+            className='icon-button'
+            aria-label='Search'
+            onClick={() => notify("Search is ready")}
+          >
+            <Search />
+          </button>
+          <div className='online-dot' />
+          <span className='saved-label'>All changes saved</span>
+          <button className='avatar-stack' onClick={() => openModal("profile")}>
+            JD
+          </button>
+        </div>
       </div>
     </header>
   );

@@ -131,9 +131,15 @@ export function RunsTable() {
               >
                 {statusLabels[run.status]}
               </span>
-              <span className='run-metric'>{run.accuracy}</span>
-              <span className='run-metric'>{run.cost}</span>
-              <span className='run-metric'>{run.latency}</span>
+              <span className='run-metric' data-label='Accuracy'>
+                {run.accuracy}
+              </span>
+              <span className='run-metric' data-label='Cost'>
+                {run.cost}
+              </span>
+              <span className='run-metric' data-label='Latency'>
+                {run.latency}
+              </span>
             </Link>
           ))
         ) : (

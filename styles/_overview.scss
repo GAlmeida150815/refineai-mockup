@@ -27,6 +27,7 @@
 .usage-chart {
   height: 220px;
   padding: 28px 10px 0;
+  @include below(sm) { height: 180px; padding-top: 18px; }
 }
 
 .chart-bars {
@@ -40,5 +41,9 @@
     background: linear-gradient(180deg, var(--accent), rgba(128, 103, 243, 0.18));
     border-radius: 5px 5px 0 0;
     min-width: 10px;
+  }
+  @include below(sm) {
+    gap: 6px;
+    i { min-width: 0; }
   }
 }

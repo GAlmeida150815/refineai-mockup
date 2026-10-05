@@ -19,6 +19,7 @@ import {
 import { ActionModal } from "./ActionModal";
 import { Sidebar } from "./Sidebar";
 import { Topbar } from "./Topbar";
+import { usePathname } from "next/navigation";
 
 export type RunDraft = {
   name: string;
@@ -44,6 +45,8 @@ type AppContextValue = {
   prompts: Prompt[];
   upsertPrompt: (prompt: Prompt) => void;
   openModal: (modal: string) => void;
+  navOpen: boolean;
+  setNavOpen: (open: boolean) => void;
   closeModal: () => void;
   runs: Run[];
   addRun: (run: Run) => void;
@@ -85,6 +88,24 @@ export function AppShell({ children }: { children: ReactNode }) {
   });
   const toastTimer = useRef<number | undefined>(undefined);
   const runsRef = useRef(runs);
+  const pathname = usePathname();
+  const [navOpen, setNavOpen] = useState(false);
+  useEffect(() => {
+    setNavOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!navOpen) return;
+    document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setNavOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [navOpen]);
 
   const notify = (message: string, tone: "success" | "error" = "success") => {
     setToast({ message, tone });
@@ -175,7 +196,12 @@ export function AppShell({ children }: { children: ReactNode }) {
         setTeam,
         notify,
         modal,
-        openModal: setModal,
+        openModal: (name) => {
+          setNavOpen(false);
+          setModal(name);
+        },
+        navOpen,
+        setNavOpen,
         closeModal: () => setModal(""),
         runs,
         addRun: (run) => setRuns((cur) => [...cur, run]),
@@ -196,6 +222,9 @@ export function AppShell({ children }: { children: ReactNode }) {
     >
       <main className={dark ? "app-shell dark-mode" : "app-shell"}>
         <Sidebar />
+        {navOpen && (
+          <div className='sidebar-backdrop' onClick={() => setNavOpen(false)} />
+        )}
         <section className='content-area'>
           <Topbar />
           {children}

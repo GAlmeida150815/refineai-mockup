@@ -1,6 +1,6 @@
 @use 'sass:map';
 
-// The four breakpoints the original stylesheet used, now named.
+// The four breakpoints the stylesheet uses, named.
 $breakpoints: (
   lg: 1050px,
   md: 850px,
@@ -8,8 +8,16 @@ $breakpoints: (
   xs: 420px,
 );
 
+// Everything at or below a breakpoint.
 @mixin below($name) {
   @media (max-width: map.get($breakpoints, $name)) {
+    @content;
+  }
+}
+
+// Only between two breakpoints, e.g. between(sm, md) = 721px–850px.
+@mixin between($from, $to) {
+  @media (min-width: map.get($breakpoints, $from) + 1) and (max-width: map.get($breakpoints, $to)) {
     @content;
   }
 }

@@ -30,6 +30,7 @@
   .primary-button { padding: 8px 12px; }
 
   @include below(sm) {
+    .primary-button { width: 100%; }
     flex-wrap: wrap;
   }
 }
@@ -63,6 +64,7 @@
       animation: run-fill linear forwards;
     }
   }
+  @include below(sm) { padding: 18px; }
 }
 
 @keyframes run-fill {
@@ -129,6 +131,11 @@
     grid-template-columns: 1fr;
     h1 { font-size: 22px; }
   }
+  @include below(sm) {
+    gap: 16px;
+    padding: 18px;
+    h1 { font-size: 20px; }
+  }
 }
 
 .decision-pips {
@@ -161,6 +168,9 @@
 
   strong { display: block; font: 600 18px var(--font-geist-mono); }
   small { color: var(--muted); font-size: 10px; }
+  @include below(sm) {
+    div { flex: 1; min-width: 0; }
+  }
 }
 
 .decision-model {
@@ -268,6 +278,7 @@
     background: var(--accent);
     color: #fff;
   }
+  @include below(sm) { padding: 12px; }
 }
 
 .judge-badge {
@@ -332,6 +343,8 @@
   @include below(sm) {
     flex-wrap: wrap;
     > span { flex-basis: 100%; }
+    bottom: 8px;
+    button { flex: 1; }
   }
 }
 

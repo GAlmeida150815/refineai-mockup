@@ -9,6 +9,11 @@
   @include below(md) {
     flex-wrap: wrap;
   }
+  @include below(sm) {
+    select,
+    > .secondary-button { flex: 1; }
+    select { font-size: 16px; }
+  }
 }
 
 .search-field {
@@ -37,6 +42,10 @@
     max-width: none;
     min-width: 100%;
   }
+
+  @include below(sm) {
+    input { font-size: 16px; }
+  }
 }
 
 // Shared by the header and every row so the columns always line up.
@@ -57,6 +66,10 @@ $metric-columns: 88px 78px 70px 70px;
   @include below(md) {
     padding-inline: 10px;
   }
+
+  @include below(sm) {
+    input { font-size: 16px; }
+  }
 }
 
 .runs-row {
@@ -68,6 +81,31 @@ $metric-columns: 88px 78px 70px 70px;
   width: 100%;
   text-align: left;
   .status-pill { justify-self: start; }
+
+  @include below(sm) {
+    grid-template-columns: 32px repeat(3, minmax(0, 1fr));
+    row-gap: 12px;
+
+    > span:nth-child(2) { grid-column: 2 / 4; min-width: 0; }
+    .status-pill { grid-column: 4; justify-self: end; }
+
+    .run-metric {
+      grid-row: 2;
+      &::before {
+        content: attr(data-label);
+        display: block;
+        margin-bottom: 3px;
+        color: var(--muted);
+        font: 9px var(--font-geist-mono);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+    }
+    .run-metric:nth-child(4) { grid-column: 2; }
+    .run-metric:nth-child(5) { grid-column: 3; }
+    .run-metric:nth-child(6) { grid-column: 4; }
+  }
+
 }
 
 .run-metric {

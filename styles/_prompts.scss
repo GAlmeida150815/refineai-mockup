@@ -15,6 +15,12 @@
   text-align: left;
   position: relative;
   &:hover { background: var(--panel-soft); }
+  @include below(sm) {
+    gap: 12px;
+    padding: 14px;
+    .prompt-number,
+    .sparkline { display: none; }
+  }
 }
 
 .prompt-number {
@@ -76,6 +82,10 @@
     flex: 1;
   }
   small { font-size: 11px; color: var(--muted); }
+  @include below(sm) {
+    flex-wrap: wrap;
+    .secondary-button { width: 100%; }
+  }
 }
 
 // ─── Library rows ────────────────────────────────────────────────
@@ -128,6 +138,9 @@
 .prompt-editor {
   .wizard-label:first-of-type { margin-top: 16px; }
   .wizard-textarea { min-height: 190px; font: 12px/1.6 var(--font-geist-mono); }
+  @include below(sm) {
+    .wizard-textarea { font-size: 16px; }
+  }
 }
 
 .variable-chips {
@@ -156,6 +169,10 @@
   border-top: 1px solid var(--border);
   color: var(--muted);
   font: 10px var(--font-geist-mono);
+  @include below(xs) {
+    flex-wrap: wrap;
+    .primary-button { width: 100%; }
+  }
 }
 
 .prompt-diff {

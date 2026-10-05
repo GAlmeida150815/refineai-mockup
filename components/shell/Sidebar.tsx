@@ -16,6 +16,7 @@ import {
   Sun,
   Moon,
   MoreHorizontal,
+  X,
 } from "lucide-react";
 import { useApp } from "./AppShell";
 
@@ -35,7 +36,8 @@ const manageItems = [
 
 export function Sidebar() {
   const pathname = usePathname();
-  const { dark, toggleTheme, team, openModal, runs } = useApp();
+  const { dark, toggleTheme, team, openModal, runs, navOpen, setNavOpen } =
+    useApp();
   const reviewCount = runs.filter((run) => run.status === "review").length;
 
   const isActive = (href: string) =>
@@ -44,17 +46,31 @@ export function Sidebar() {
       : pathname === href || pathname.startsWith(`${href}/`);
 
   return (
-    <aside className='sidebar'>
+    <aside
+      className={`sidebar ${navOpen ? "open" : ""}`}
+      aria-label='Main navigation'
+    >
       <div className='brand'>
         <span className='brand-mark'>
           <GitBranch />
         </span>
-        <span>
+        <a href='/' className='brand-name'>
           refine<span className='brand-accent'>AI</span>
-        </span>
+        </a>
+        <button
+          className='icon-button sidebar-close'
+          aria-label='Close navigation'
+          onClick={() => setNavOpen(false)}
+        >
+          <X />
+        </button>
       </div>
 
-      <button className='workspace-switcher' onClick={() => openModal("team")}>
+      <button
+        className='workspace-switcher'
+        onClick={() => openModal("team")}
+        title={team}
+      >
         <span className='workspace-avatar'>{team[0]}</span>
         <span className='workspace-name'>{team}</span>
         <ChevronDown />
@@ -66,6 +82,7 @@ export function Sidebar() {
           <Link
             key={href}
             href={href}
+            title={label}
             className={`nav-item ${isActive(href) ? "active" : ""}`}
             aria-current={isActive(href) ? "page" : undefined}
           >
@@ -91,6 +108,7 @@ export function Sidebar() {
           <Link
             key={href}
             href={href}
+            title={label}
             className={`nav-item ${isActive(href) ? "active" : ""}`}
             aria-current={isActive(href) ? "page" : undefined}
           >
@@ -101,7 +119,11 @@ export function Sidebar() {
       </nav>
 
       <div className='sidebar-bottom'>
-        <button className='nav-item' onClick={toggleTheme}>
+        <button
+          className='nav-item'
+          onClick={toggleTheme}
+          title={dark ? "Light mode" : "Black mode"}
+        >
           {dark ? <Sun /> : <Moon />}
           <span>{dark ? "Light mode" : "Black mode"}</span>
         </button>

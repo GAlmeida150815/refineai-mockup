@@ -9,6 +9,8 @@
   @include below(md) {
     grid-template-columns: 1fr 1fr;
   }
+
+  @include below(sm) { grid-template-columns: 1fr; }
 }
 
 .model-card {
