@@ -54,7 +54,7 @@ export function RunProgress({
           <h2>{run.name}</h2>
           <p>
             {pausesAfter
-              ? "When this pass finishes, the judge proposes prompt refinements and the run pauses in Runs until you choose one per model. You can leave this page."
+              ? "When this pass finishes, the models proposes prompt refinements, while the judges evaluate them and the run pauses in Runs until you choose one per model. You can leave this page."
               : "This is the final pass. Results open here automatically when it finishes."}
           </p>
         </div>

@@ -9,9 +9,14 @@ export function ConfigurationStep() {
     <>
       <h1>Configure human review</h1>
       <p>
-        After each pass, {draft.judges.join(" + ") || "the judge"}{" "}
-        {draft.judges.length > 1 ? "propose" : "proposes"} three refinements per
-        model. The run waits in Runs until you choose.
+        After each pass, the models (
+        {draft.selectedModels.join(" + ") || "the judge"}{" "}
+        {draft.selectedModels.length > 1 ? "propose" : "proposes"}) three
+        refinements per model.
+        <br />
+        Then, each of the judges ({draft.judges.join(" + ") ||
+          "the judge"}) {draft.judges.length > 1 ? "evaluate" : "evaluates"} the
+        refinements. The run waits in Runs until you choose.
       </p>
 
       <section className='human-review-setting card'>

@@ -49,26 +49,28 @@ export function ModelsStep() {
         Models to test <small>{draft.selectedModels.length} selected</small>
       </h2>
       <div className='wizard-models'>
-        {models.map((model) => (
-          <button
-            className={`wizard-model ${draft.selectedModels.includes(model.name) ? "selected" : ""}`}
-            key={model.name}
-            onClick={() =>
-              updateDraft({
-                selectedModels: toggled(draft.selectedModels, model.name),
-              })
-            }
-          >
-            <span className='model-orb'>{model.name[0]}</span>
-            <span>
-              <strong>{model.name}</strong>
-              <small>
-                {model.provider} · {model.cost} / 1k tokens
-              </small>
-            </span>
-            <Check />
-          </button>
-        ))}
+        {models
+          .filter((model) => model.kind !== "classifier")
+          .map((model) => (
+            <button
+              className={`wizard-model ${draft.selectedModels.includes(model.name) ? "selected" : ""}`}
+              key={model.name}
+              onClick={() =>
+                updateDraft({
+                  selectedModels: toggled(draft.selectedModels, model.name),
+                })
+              }
+            >
+              <span className='model-orb'>{model.name[0]}</span>
+              <span>
+                <strong>{model.name}</strong>
+                <small>
+                  {model.provider} · {model.cost} / 1k tokens
+                </small>
+              </span>
+              <Check />
+            </button>
+          ))}
       </div>
 
       <button
@@ -82,7 +84,7 @@ export function ModelsStep() {
       </button>
 
       <h2 className='wizard-section-title'>
-        Judges <small>Score every output and propose prompt refinements</small>
+        Judges <small>Score every output</small>
       </h2>
       <div className='wizard-models'>
         {models.map((model) => (
